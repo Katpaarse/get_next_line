@@ -6,28 +6,37 @@
 /*   By: jukerste <jukerste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:11:56 by jukerste          #+#    #+#             */
-/*   Updated: 2025/02/11 17:34:25 by jukerste         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:54:16 by jukerste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char	*extract_line(char **line_buffer)
 {
-	static char	*leftover;
-	static char	buffer[BUFFER_SIZE];
-	char		*line;
+	char	*leftover;
+	char	*temp_line;
+	size_t	i;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	i = 0;
+	if (*line_buffer == NULL)
 		return (NULL);
-	line = read_and_stash(fd, leftover, buffer);
-	if (line == NULL)
+	while ((*line_buffer)[i] != '\n' && (*line_buffer)[i] != '\0')
+		i++;
+	if ((*line_buffer)[i] == '\0')
+		return (NULL);
+	leftover = ft_substr(*line_buffer, i + 1, ft_strlen(*line_buffer) - i - 1);
+	if (leftover == NULL)
+		return (NULL);
+	temp_line = ft_substr(*line_buffer, 0, i + 1);
+	if (*leftover == '\0' || temp_line == NULL)
 	{
+		free(leftover);
 		leftover = NULL;
-		return (NULL);
 	}
-	leftover = extract_line(&line);
-	return (line);
+	free(*line_buffer);
+	*line_buffer = temp_line;
+	return (leftover);
 }
 
 char	*read_and_stash(int fd, char *leftover, char *buffer)
@@ -57,29 +66,20 @@ char	*read_and_stash(int fd, char *leftover, char *buffer)
 	return (leftover);
 }
 
-char	*extract_line(char **line_buffer)
+char	*get_next_line(int fd)
 {
-	char	*leftover;
-	char	*temp_line;
-	size_t	i;
+	static char	*leftover;
+	static char	buffer[BUFFER_SIZE];
+	char		*line;
 
-	i = 0;
-	if (*line_buffer == NULL)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	while ((*line_buffer)[i] != '\n' && (*line_buffer)[i] != '\0')
-		i++;
-	if ((*line_buffer)[i] == '\0')
-		return (NULL);
-	leftover = ft_substr(*line_buffer, i + 1, ft_strlen(*line_buffer) - i - 1);
-	if (leftover == NULL)
-		return (NULL);
-	temp_line = ft_substr(*line_buffer, 0, i + 1);
-	if (*leftover == '\0' || temp_line == NULL)
+	line = read_and_stash(fd, leftover, buffer);
+	if (line == NULL)
 	{
-		free(leftover);
 		leftover = NULL;
+		return (NULL);
 	}
-	free(*line_buffer);
-	*line_buffer = temp_line;
-	return (leftover);
+	leftover = extract_line(&line);
+	return (line);
 }

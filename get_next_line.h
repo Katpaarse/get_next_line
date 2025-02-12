@@ -6,7 +6,7 @@
 /*   By: jukerste <jukerste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:13:10 by jukerste          #+#    #+#             */
-/*   Updated: 2025/02/11 17:28:15 by jukerste         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:54:28 by jukerste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <stdlib.h>
 
 char	*get_next_line(int fd);
-char	*extract_line(char **line_buffer);
-char	*read_and_stash(int fd, char *leftover, char *buffer);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
