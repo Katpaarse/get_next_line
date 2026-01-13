@@ -6,7 +6,7 @@
 /*   By: jukerste <jukerste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 17:38:20 by kat               #+#    #+#             */
-/*   Updated: 2025/02/12 15:48:36 by jukerste         ###   ########.fr       */
+/*   Updated: 2026/01/13 16:33:17 by jukerste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 int main(void)
 {
     char    *line;
-    int     i;
     int     fd;
 
     fd = open("anytext.txt", O_RDONLY);
@@ -24,7 +23,7 @@ int main(void)
     while ((line = get_next_line(fd)) != NULL)
     {
         printf("%s", line);
-        free (line);
+        free(line);
     }
     close(fd);
     return (0);
