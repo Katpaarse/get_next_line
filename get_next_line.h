@@ -6,14 +6,14 @@
 /*   By: jukerste <jukerste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:13:10 by jukerste          #+#    #+#             */
-/*   Updated: 2025/02/12 20:54:28 by jukerste         ###   ########.fr       */
+/*   Updated: 2026/01/13 17:19:59 by jukerste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 42
 # endif
 
 # include <fcntl.h>
